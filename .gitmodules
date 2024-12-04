@@ -1,3 +1,6 @@
 [submodule "apigateway"]
 	path = apigateway
 	url = https://gitlab.com/los-salsa-blanca/api-gateway-arq.git
+[submodule "ms-publication"]
+	path = ms-publication
+	url = https://gitlab.com/los-salsa-blanca/ms-publication-java.git
