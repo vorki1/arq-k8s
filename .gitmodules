@@ -1,0 +1,3 @@
+[submodule "apigateway"]
+	path = apigateway
+	url = https://gitlab.com/los-salsa-blanca/api-gateway-arq.git
