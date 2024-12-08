@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: k8s-gateway
+  name: k8s-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8s-gateway
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: k8s-gateway
+    spec:
+      containers:
+      - image: apigateway-arq
+        name: apigateway-arq
+        command: ["node"]
+        args: ["dist/main"]
+        imagePullPolicy: Never
+        env:
+            - name: MS_PUBLICATION_GRPC_URL
+              value: "k8s-publication:50051"
+        resources: {}
+status: {}
