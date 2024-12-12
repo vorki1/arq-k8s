@@ -26,5 +26,7 @@ spec:
         env:
             - name: MS_PUBLICATION_GRPC_URL
               value: "k8s-publication:50051"
+            - name: MS_PUBLICATION_GRPC_URL_PAY
+              value: "k8s-pay:50055"
         resources: {}
 status: {}

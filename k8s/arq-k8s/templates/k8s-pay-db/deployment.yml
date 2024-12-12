@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: k8s-pay-db
+  name: k8s-pay-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8s-pay-db
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: k8s-pay-db
+    spec:
+      containers:
+      - image: postgres:10
+        name: postgres
+        imagePullPolicy: Never
+        env:
+          - name: POSTGRES_USER
+            value: "pay"
+          - name: POSTGRES_PASSWORD
+            value: "root"
+          - name: POSTGRES_DB
+            value: "paydb"
+        resources: {}
+        volumeMounts:
+            - name: pgdata
+              mountPath: /var/lib/postgresql/data
+              subPath: postgres
+      volumes:
+        - name: pgdata
+          persistentVolumeClaim:
+            claimName: pgdata-pay-pvc
+status: {}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pgdata-pay-pvc
+  labels:
+    app: k8s-pay-db
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: hostpath

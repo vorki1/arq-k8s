@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: k8s-pay
+  name: k8s-pay
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8s-pay
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: k8s-pay
+    spec:
+      containers:
+      - image: pay
+        name: pay
+        command: ["mvn"]
+        args: ["spring-boot:run"]
+        imagePullPolicy: Never
+        env:
+            - name: DB_HOST
+              value: "k8s-pay-db"
+            - name: DB_PORT
+              value: "5444"
+            - name: DB_USER
+              value: "pay"
+            - name: DB_PASSWORD
+              value: "root"
+            - name: DB_NAME
+              value: "paydb"
+        resources: {}
+status: {}
